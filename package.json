@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/AashirRaz/rn-animated-toast.git"
   },
-  "author": "Syed Aashir Raza <syedaashirraza123@gmail.com>",
+  "author": {
+    "name": "Syed Aashir Raza",
+    "email": "syedaashirraza123@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AashirRaz/rn-animated-toast/issues"
@@ -29,5 +32,20 @@
     "@types/react": "^18.2.7",
     "@tsconfig/react-native": "^3.0.2",
     "typescript": "^5.0.4"
-  }
+  },
+  "keywords": [
+    "react-native-component",
+    "react-component",
+    "react-native",
+    "ios",
+    "android",
+    "windows",
+    "toast",
+    "animated",
+    "animation",
+    "message",
+    "animated-toast",
+    "rn-animated-toast",
+    "alert"
+  ]
 }

@@ -84,7 +84,7 @@ export default function useToast(
   }, [visible]);
 
   const Icon = toastPropsRef?.current?.showDefaultIcon
-    ? ToastConfig[toastPropsRef?.current?.type].icon ?? null
+    ? ToastConfig["default"].icon
     : toastPropsRef?.current?.iconPath ??
       ToastConfig[toastPropsRef?.current?.type || "default"].icon;
 
@@ -96,6 +96,7 @@ export default function useToast(
     toast: {
       message: toastPropsRef?.current?.message,
       type: toastPropsRef?.current?.type,
+      isDefault: toastPropsRef?.current?.showDefaultIcon,
     },
   };
 }

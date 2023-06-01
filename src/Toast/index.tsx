@@ -68,7 +68,10 @@ const Toast = ({
       {Icon && (
         <Image
           source={Icon}
-          style={styles.iconStyle(ToastConfig[toast.type]?.color)}
+          style={styles.iconStyle(
+            ToastConfig[toast.type]?.color,
+            toast.isDefault
+          )}
         />
       )}
       <View style={toast.message?.length > 36 && {flex: 1}}>
@@ -90,12 +93,12 @@ const Toast = ({
 export default Toast;
 
 const styles = StyleSheet.create({
-  iconStyle: (color: string): any => ({
+  iconStyle: (color: string, isDefault: boolean): any => ({
     height: 30,
     width: 30,
     resizeMode: "contain",
     marginRight: 10,
-    tintColor: color,
+    ...(!isDefault && {tintColor: color}),
   }),
   mainContainer: (
     visible: boolean,
