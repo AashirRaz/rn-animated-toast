@@ -1,15 +1,18 @@
-import {ToastConfig} from "@Constants/app";
 import React from "react";
-import {Animated} from "react-native";
+import {Animated, ImageSourcePropType} from "react-native";
 import {Colors, TOAST_COLORS} from "../themes/Colors";
 import {Icons} from "../assets/icons";
 
 let toastRef = React.createRef();
 let toastPropsRef = React.createRef();
 
-// type ShowToastType = 'success' | 'error' | 'info' | 'default';
+type ShowToastType = "success" | "error" | "info" | "default";
 
-export const showToast = (message, type = "default", iconPath) => {
+export const showToast = (
+  message: string,
+  type: ShowToastType = "default",
+  iconPath?: ImageSourcePropType
+) => {
   toastPropsRef.current = {
     message,
     type,
@@ -30,7 +33,11 @@ export const ToastConfig = {
   default: {color: Colors.DARK_2, icon: null},
 };
 
-export default function useToast(position, offset) {
+export default function useToast(
+  position: string,
+  offset: number,
+  visibilityTime: number
+) {
   const [visible, setVisiblity] = React.useState(false);
   const fadeAnim = React.useRef(new Animated.Value(0.5)).current;
   const posAnim = React.useRef(new Animated.Value(-80)).current;
@@ -62,7 +69,7 @@ export default function useToast(position, offset) {
 
     const a = setTimeout(() => {
       hideToast();
-    }, 3000);
+    }, visibilityTime);
 
     return () => {
       clearTimeout(a);

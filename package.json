@@ -1,7 +1,7 @@
 {
-  "name": "react-native-toasts",
+  "name": "rn-animated-toast",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple and customizable toast library for react native.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"No test specified\""
@@ -17,8 +17,17 @@
   },
   "homepage": "https://github.com/AashirRaz/react-native-toasts#readme",
   "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "dependencies": {
+    "react-native-size-matters": "^0.4.0",
     "react": "18.2.0",
     "react-native": "0.71.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.7",
+    "@tsconfig/react-native": "^3.0.2",
+    "typescript": "^5.0.4"
   }
 }
-

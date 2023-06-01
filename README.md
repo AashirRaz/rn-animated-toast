@@ -1,1 +1,1 @@
-# react-native-toasts
+# rn-animated-toast

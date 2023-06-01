@@ -3,8 +3,22 @@ import {Animated, Image, StyleSheet, Text, View} from "react-native";
 import {Colors} from "../themes/Colors";
 import useToast, {ToastConfig, hideToast} from "./ToastContainer";
 
-const Toast = ({position = "bottom", offset = 50}) => {
-  const {fadeAnim, posAnim, visible, Icon, toast} = useToast(position, offset);
+type ToastType = {
+  position?: "top" | "bottom";
+  offset?: number;
+  visibilityTime?: number;
+};
+
+const Toast = ({
+  position = "bottom",
+  offset = 50,
+  visibilityTime = 4000,
+}: ToastType) => {
+  const {fadeAnim, posAnim, visible, Icon, toast} = useToast(
+    position,
+    offset,
+    visibilityTime
+  );
 
   return (
     <Animated.View
@@ -39,14 +53,20 @@ const Toast = ({position = "bottom", offset = 50}) => {
 export default Toast;
 
 const styles = StyleSheet.create({
-  iconStyle: (type) => ({
+  iconStyle: (type: string): any => ({
     height: 30,
     width: 30,
     resizeMode: "contain",
     marginRight: 10,
     tintColor: ToastConfig[type]?.color,
   }),
-  mainContainer: (visible, fadeAnim, posAnim, type, position) => ({
+  mainContainer: (
+    visible: boolean,
+    fadeAnim: any,
+    posAnim: any,
+    type: string,
+    position: string
+  ) => ({
     position: "absolute",
     alignSelf: "center",
     alignItems: "center",
