@@ -1,23 +1,55 @@
 import React from "react";
-import {Animated, Image, StyleSheet, Text, View} from "react-native";
-import {Colors} from "../themes/Colors";
+import {
+  Animated,
+  Image,
+  ImageRequireSource,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import {Colors, TOAST_COLORS} from "../themes/Colors";
 import useToast, {ToastConfig, hideToast} from "./ToastContainer";
+import {Icons} from "../assets/icons";
 
 type ToastType = {
   position?: "top" | "bottom";
   offset?: number;
   visibilityTime?: number;
+  successIcon?: ImageRequireSource;
+  errorIcon?: ImageRequireSource;
+  infoIcon?: ImageRequireSource;
+  defaultIcon?: ImageRequireSource;
+  successColor?: string;
+  errorColor?: string;
+  infoColor?: string;
+  defaultColor?: string;
 };
 
 const Toast = ({
   position = "bottom",
   offset = 50,
   visibilityTime = 4000,
+  successIcon = Icons.ToastCheck,
+  errorIcon = Icons.ToastError,
+  infoIcon = Icons.ToastInfo,
+  defaultIcon,
+  successColor = TOAST_COLORS.success,
+  errorColor = TOAST_COLORS.error,
+  infoColor = TOAST_COLORS.info,
+  defaultColor = Colors.DARK_2,
 }: ToastType) => {
+  const ToastConfig = {
+    success: {color: successColor, icon: successIcon},
+    error: {color: errorColor, icon: errorIcon},
+    info: {color: infoColor, icon: infoIcon},
+    default: {color: defaultColor, icon: defaultIcon},
+  };
+
   const {fadeAnim, posAnim, visible, Icon, toast} = useToast(
     position,
     offset,
-    visibilityTime
+    visibilityTime,
+    ToastConfig
   );
 
   return (
@@ -29,11 +61,16 @@ const Toast = ({
         visible,
         fadeAnim,
         posAnim,
-        toast.type,
+        ToastConfig[toast.type]?.color,
         position
       )}
     >
-      {Icon && <Image source={Icon} style={styles.iconStyle(toast.type)} />}
+      {Icon && (
+        <Image
+          source={Icon}
+          style={styles.iconStyle(ToastConfig[toast.type]?.color)}
+        />
+      )}
       <View style={toast.message?.length > 36 && {flex: 1}}>
         <Text
           style={{
@@ -53,18 +90,18 @@ const Toast = ({
 export default Toast;
 
 const styles = StyleSheet.create({
-  iconStyle: (type: string): any => ({
+  iconStyle: (color: string): any => ({
     height: 30,
     width: 30,
     resizeMode: "contain",
     marginRight: 10,
-    tintColor: ToastConfig[type]?.color,
+    tintColor: color,
   }),
   mainContainer: (
     visible: boolean,
     fadeAnim: any,
     posAnim: any,
-    type: string,
+    color: string,
     position: string
   ) => ({
     position: "absolute",
@@ -79,7 +116,7 @@ const styles = StyleSheet.create({
         translateY: posAnim,
       },
     ],
-    borderColor: ToastConfig[type]?.color,
+    borderColor: color,
     borderWidth: 2,
     backgroundColor: Colors.WHITE,
     borderRadius: 40,

@@ -1,21 +1,34 @@
 import React from "react";
-import {Animated, ImageSourcePropType} from "react-native";
+import {Animated, ImageRequireSource} from "react-native";
 import {Colors, TOAST_COLORS} from "../themes/Colors";
 import {Icons} from "../assets/icons";
 
 let toastRef = React.createRef();
-let toastPropsRef = React.createRef();
+let toastPropsRef = React.createRef<{
+  message: string;
+  type: ShowToastType;
+  showDefaultIcon: boolean;
+  iconPath?: ImageRequireSource;
+}>();
 
 type ShowToastType = "success" | "error" | "info" | "default";
+type ToastConfigType = {
+  success: {color: string; icon: ImageRequireSource};
+  error: {color: string; icon: ImageRequireSource};
+  info: {color: string; icon: ImageRequireSource};
+  default: {color: string; icon: ImageRequireSource | undefined};
+};
 
 export const showToast = (
   message: string,
   type: ShowToastType = "default",
-  iconPath?: ImageSourcePropType
+  showDefaultIcon: boolean,
+  iconPath?: ImageRequireSource
 ) => {
   toastPropsRef.current = {
     message,
     type,
+    showDefaultIcon,
     iconPath,
   };
 
@@ -26,17 +39,11 @@ export const hideToast = () => {
   toastRef?.current && toastRef?.current(false);
 };
 
-export const ToastConfig = {
-  success: {color: TOAST_COLORS.success, icon: Icons.ToastCheck},
-  error: {color: TOAST_COLORS.error, icon: Icons.ToastError},
-  info: {color: TOAST_COLORS.info, icon: Icons.ToastInfo},
-  default: {color: Colors.DARK_2, icon: null},
-};
-
 export default function useToast(
   position: string,
   offset: number,
-  visibilityTime: number
+  visibilityTime: number,
+  ToastConfig: ToastConfigType
 ) {
   const [visible, setVisiblity] = React.useState(false);
   const fadeAnim = React.useRef(new Animated.Value(0.5)).current;
@@ -76,9 +83,10 @@ export default function useToast(
     };
   }, [visible]);
 
-  const Icon =
-    toastPropsRef?.current?.iconPath ??
-    ToastConfig[toastPropsRef?.current?.type || "default"].icon;
+  const Icon = toastPropsRef?.current?.showDefaultIcon
+    ? ToastConfig[toastPropsRef?.current?.type].icon ?? null
+    : toastPropsRef?.current?.iconPath ??
+      ToastConfig[toastPropsRef?.current?.type || "default"].icon;
 
   return {
     visible,
