@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/rn-animated-toast.svg)](https://www.npmjs.com/package/rn-animated-toast "View this project on npm")
 [![License](https://img.shields.io/npm/l/rn-animated-toast.svg)](https://github.com/AashirRaz/rn-animated-toast/blob/main/LICENSE "View this project on npm")
-[![npm total downloads](https://img.shields.io/npm/dt/rn-animated-toast.svg)](https://img.shields.io/npm/dt/rn-animated-toast.svg)
 [![Platform](https://img.shields.io/badge/platform-ios%20%7C%20android-989898.svg?style=flat-square)](https://www.npmjs.com/package/rn-animated-toast "View this project on npm")
 
 Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingredient for serving up delightful and informative messages.
@@ -14,13 +13,13 @@ Open a Terminal in the project root and run:
 Using npm:
 
 ```sh
-npm install --save react-native-device-info
+npm install rn-animated-toast
 ```
 
 or using yarn:
 
 ```sh
-yarn add react-native-device-info
+yarn add rn-animated-toast
 ```
 
 ## Features
@@ -107,7 +106,7 @@ const onPress = () => {
 
 ## Contributing
 
-We welcome contributions from the community! Please refer to the [contribution guidelines](https://github.com/AashirRaz/rn-animated-toast/blob/main/CONTRIBUTING.md) for more details.
+We welcome contributions from the community! Please refer to the [Contribution Guidelines](https://github.com/AashirRaz/rn-animated-toast/blob/main/CONTRIBUTING.md) for more details.
 
 ## License
 
