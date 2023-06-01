@@ -41,28 +41,19 @@ export default function App() {
 ```js
 const onPress = () => {
     showToast(message: "Task finished successfully",
-        type: "success",
+        type: "default" | "success" | "error" | "info",
         showDefaultIcon: false,
         iconPath: require("../../images/icon.png")
     );
 }
 ```
 
-<!-- ## Props
-
-| Prop            | Type               | Optional  | Default | Description                                              |
-| --------------- | ------------------ | --------- | ------- | -------------------------------------------------------- | --- | ------- | ----------------------- |
-| message         | string             | No        |         | Message which is need to be displayed                    |
-| type            | ""default"         | "success" | "error" | "info""                                                  | Yes | default | type of showing message |
-| showDefaultIcon | boolean            | Yes       | false   | To display the default icon , without showing type icons |
-| iconPath        | ImageRequireSource | Yes       |         | Icon to display in the toast message                     |
- -->
-
 ## Props
 
 | Prop            | Type               | Optional | Default | Description                                              |
 | --------------- | ------------------ | -------- | ------- | -------------------------------------------------------- |
 | message         | string             | No       |         | Message which is need to be displayed                    |
+| type            | string             | Yes      | default | type of showing message                                  |
 | showDefaultIcon | boolean            | Yes      | false   | To display the default icon , without showing type icons |
 | iconPath        | ImageRequireSource | Yes      |         | Icon to display in the toast message                     |
 
