@@ -1,0 +1,24 @@
+{
+  "name": "react-native-toasts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AashirRaz/react-native-toasts.git"
+  },
+  "author": "Syed Aashir Raza <syedaashirraza123@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AashirRaz/react-native-toasts/issues"
+  },
+  "homepage": "https://github.com/AashirRaz/react-native-toasts#readme",
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-native": "0.71.7"
+  }
+}
+
