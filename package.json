@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AashirRaz/react-native-toasts.git"
+    "url": "git+https://github.com/AashirRaz/rn-animated-toast.git"
   },
   "author": "Syed Aashir Raza <syedaashirraza123@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AashirRaz/react-native-toasts/issues"
+    "url": "https://github.com/AashirRaz/rn-animated-toast/issues"
   },
-  "homepage": "https://github.com/AashirRaz/react-native-toasts#readme",
+  "homepage": "https://github.com/AashirRaz/rn-animated-toast#readme",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
