@@ -2,13 +2,6 @@
 
 Toast component for React Native, supports Android, IOS and Web
 
-## Features
-
-- Fully Customizable
-- Swipe to close support
-- Smooth animation
-- Fully typed with TypeScript
-
 ## Install
 
 Open a Terminal in the project root and run:
@@ -16,6 +9,13 @@ Open a Terminal in the project root and run:
 ```sh
 yarn add rn-animated-toast
 ```
+
+## Features
+
+- Fully Customizable
+- Swipe to close support
+- Smooth animation
+- Fully typed with TypeScript
 
 ## Usage
 
@@ -31,5 +31,19 @@ export default function App() {
     <Toast>
     <>
   );
+}
+```
+
+## Methods
+
+### showToast()
+
+```js
+const onPress = () => {
+showToast(message: "Task finished successfully",
+  type: "default" | "success" | "error" | "info",
+  showDefaultIcon: true | false,
+  iconPath: require("../../images/icon.png")
+);
 }
 ```
