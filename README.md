@@ -1,8 +1,8 @@
 # rn-animated-toast
 
-[![npm version](https://img.shields.io/npm/v/rn-animated-toast.svg)](https://www.npmjs.com/package/rn-animated-toast)
-[![License](https://img.shields.io/npm/l/rn-animated-toast.svg)](https://github.com/AashirRaz/rn-animated-toast/blob/main/LICENSE)
-[![npm licence](http://img.shields.io/npm/l/react-native-slider.svg?style=flat-square)](https://www.npmjs.com/package/rn-animated-toast "View this project on npm")
+[![npm version](https://img.shields.io/npm/v/rn-animated-toast.svg)](https://www.npmjs.com/package/rn-animated-toast "View this project on npm")
+[![License](https://img.shields.io/npm/l/rn-animated-toast.svg)](https://github.com/AashirRaz/rn-animated-toast/blob/main/LICENSE "View this project on npm")
+[![npm total downloads](https://img.shields.io/npm/dt/rn-animated-toast.svg)](https://img.shields.io/npm/dt/rn-animated-toast.svg)
 [![Platform](https://img.shields.io/badge/platform-ios%20%7C%20android-989898.svg?style=flat-square)](https://www.npmjs.com/package/rn-animated-toast "View this project on npm")
 
 Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingredient for serving up delightful and informative messages.
@@ -11,12 +11,16 @@ Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingred
 
 Open a Terminal in the project root and run:
 
+Using npm:
+
 ```sh
-npm install rn-animated-toast
+npm install --save react-native-device-info
+```
 
-or
+or using yarn:
 
-yarn add rn-animated-toast
+```sh
+yarn add react-native-device-info
 ```
 
 ## Features
@@ -103,12 +107,14 @@ const onPress = () => {
 
 ## Contributing
 
-We welcome contributions from the community! Please refer to the [contribution guidelines]("https://github.com/AashirRaz/rn-animated-toast/blob/main/CONTRIBUTING.md") for more details.
+We welcome contributions from the community! Please refer to the [contribution guidelines](https://github.com/AashirRaz/rn-animated-toast/blob/main/CONTRIBUTING.md) for more details.
 
 ## License
 
 This project is licensed under the [MIT License](https://github.com/AashirRaz/rn-animated-toast/blob/main/LICENSE).
 
-If you find rn-animated-toast useful, consider giving it a star on [GitHub]("https://github.com/AashirRaz/rn-animated-toast") and spread the word! 🌟
+##
+
+If you find rn-animated-toast useful, consider giving it a star on [GitHub](https://github.com/AashirRaz/rn-animated-toast) and spread the word! 🌟
 
 ---
