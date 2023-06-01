@@ -1,5 +1,7 @@
 # rn-animated-toast
 
+[![npm version](https://img.shields.io/npm/v/rn-animated-toast.svg)](https://www.npmjs.com/package/rn-animated-toast)
+[![License](https://img.shields.io/npm/l/rn-animated-toast.svg)](https://github.com/AashirRaz/rn-animated-toast/blob/main/LICENSE)
 [![npm licence](http://img.shields.io/npm/l/react-native-slider.svg?style=flat-square)](https://www.npmjs.com/package/rn-animated-toast "View this project on npm")
 [![Platform](https://img.shields.io/badge/platform-ios%20%7C%20android-989898.svg?style=flat-square)](https://www.npmjs.com/package/rn-animated-toast "View this project on npm")
 
@@ -10,18 +12,22 @@ Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingred
 Open a Terminal in the project root and run:
 
 ```sh
+npm install rn-animated-toast
+
+or
+
 yarn add rn-animated-toast
 ```
 
 ## Features
 
-- `Easy-to-use API`: Quickly integrate toast messages into your React Native app with a simple and intuitive API.
-- `Customizable Appearance`: Customize the look and feel of your toasts by configuring properties such as background color, text color, duration, and more.
+- `Easy-to-use API:` Quickly integrate toast messages into your React Native app with a simple and intuitive API.
+- `Customizable Appearance:` Customize the look and feel of your toasts by configuring properties such as background color, text color, duration, and more.
 - `Multiple Toast Types:` Display different types of toasts, including success, error, warning, or general informative messages.
-- `Built with TypeScript`: The entire codebase of the toast package is written in TypeScript, providing improved code maintainability, better developer tooling, and enhanced static type checking.
-- `Positioning Options`: Choose the position where your toasts appear on the screen, such as top, bottom.
-- `Duration Control`: Set the duration for how long the toast message stays visible before automatically dismissing.
-- `Lightweight and Performant`: Designed to be lightweight and optimized for performance, ensuring smooth operation in your React Native app.
+- `Built with TypeScript:` The entire codebase of the toast package is written in TypeScript, providing improved code maintainability, better developer tooling, and enhanced static type checking.
+- `Positioning Options:` Choose the position where your toasts appear on the screen, such as top, bottom.
+- `Duration Control:` Set the duration for how long the toast message stays visible before automatically dismissing.
+- `Lightweight and Performant:` Designed to be lightweight and optimized for performance, ensuring smooth operation in your React Native app.
 
 ## Usage
 
@@ -94,5 +100,15 @@ const onPress = () => {
   hideToast();
 };
 ```
+
+## Contributing
+
+We welcome contributions from the community! Please refer to the [contribution guidelines]("https://github.com/AashirRaz/rn-animated-toast/blob/main/CONTRIBUTING.md") for more details.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/AashirRaz/rn-animated-toast/blob/main/LICENSE).
+
+If you find rn-animated-toast useful, consider giving it a star on [GitHub]("https://github.com/AashirRaz/rn-animated-toast") and spread the word! 🌟
 
 ---
