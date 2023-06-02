@@ -6,6 +6,10 @@
 
 Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingredient for serving up delightful and informative messages.
 
+## Demo
+
+[![Demo Video](./src/assets/demo/demo.mp4)]
+
 ## Install
 
 Open a Terminal in the project root and run:
