@@ -22,7 +22,7 @@ type ToastConfigType = {
 export const showToast = (
   message: string,
   type: ShowToastType = "default",
-  showDefaultIcon: boolean,
+  showDefaultIcon: boolean = false,
   iconPath?: ImageRequireSource
 ) => {
   toastPropsRef.current = {
@@ -66,11 +66,11 @@ export default function useToast(
       Animated.timing(fadeAnim, {
         toValue: visible ? 1 : 0,
         duration: 400,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.spring(posAnim, {
         toValue: animateToValue,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
