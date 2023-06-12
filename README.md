@@ -6,9 +6,9 @@
 
 Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingredient for serving up delightful and informative messages.
 
-## Demo
+<!-- ## Demo
 
-[![Demo Video](https://bbdblobstorage.blob.core.windows.net/bbd/src/06_12_2023/d4929d9e-9aab-4a4e-a864-a5d0d6cb4740/Videos/demo_78acc602-4565-4a69-9ef6-01de82ad1c42.mp4)]
+[![Demo Video](https://bbdblobstorage.blob.core.windows.net/bbd/src/06_12_2023/d4929d9e-9aab-4a4e-a864-a5d0d6cb4740/Videos/demo_78acc602-4565-4a69-9ef6-01de82ad1c42.mp4)] -->
 
 ## Install
 
