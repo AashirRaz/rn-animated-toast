@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-import {Animated, Image, StyleSheet, Text, View} from 'react-native';
-import {Colors} from '../themes/Colors';
-import {once} from '../reuseableFunction';
-import {AnimatedToastProps} from './type';
+import React, {useEffect} from "react";
+import {Animated, Image, StyleSheet, Text, View} from "react-native";
+import {Colors} from "../themes/Colors";
+import {once} from "../reuseableFunction";
+import {AnimatedToastProps} from "./type";
 
 const AnimatedToast = ({
   index,
@@ -36,8 +36,8 @@ const AnimatedToast = ({
   const translateY = animInstance.interpolate({
     inputRange: [0, 1],
     outputRange: [
-      position == 'bottom' ? 200 : -200,
-      position == 'bottom' ? -toast.offSet : toast.offSet,
+      position == "bottom" ? 200 : -200,
+      position == "bottom" ? -toast.offSet : toast.offSet,
     ],
   });
 
@@ -50,18 +50,21 @@ const AnimatedToast = ({
       onTouchMove={({nativeEvent}) => {
         nativeEvent.locationY < 10 && hide(0);
       }}
-      onLayout={e => cbOnLayout(e.nativeEvent.layout.height)}
+      onLayout={(e) => cbOnLayout(e.nativeEvent.layout.height)}
       style={styles.toast(
-        position == 'bottom',
+        position == "bottom",
         opacity,
         translateY,
         colorNIcon.color,
-      )}>
-      <Image
-        source={icon}
-        style={styles.iconStyle(!!toast?.iconPath, colorNIcon?.color)}
-      />
-
+        !!icon
+      )}
+    >
+      {icon && (
+        <Image
+          source={icon}
+          style={styles.iconStyle(!!toast?.iconPath, colorNIcon?.color)}
+        />
+      )}
       <View style={toast.message?.length > 36 && {flex: 1}}>
         <Text style={styles.toastMessage}>{toast.message}</Text>
       </View>
@@ -77,11 +80,12 @@ const styles = StyleSheet.create({
     opacity: any,
     translateY: any,
     color: string,
+    isIcon: boolean
   ): any => ({
-    position: 'absolute',
-    alignSelf: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    position: "absolute",
+    alignSelf: "center",
+    alignItems: "center",
+    flexDirection: "row",
     ...(isBottomPos && {bottom: 0}),
     opacity,
     transform: [{translateY}],
@@ -99,19 +103,19 @@ const styles = StyleSheet.create({
     shadowRadius: 5.62,
     elevation: 8,
     marginHorizontal: 30,
-    paddingRight: 20,
+    paddingRight: isIcon ? 20 : 10,
     paddingLeft: 10,
   }),
   iconStyle: (isIconPath: boolean, color: string): any => ({
     width: 30,
     height: 30,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginRight: 10,
     ...(!isIconPath && {tintColor: color}),
   }),
   toastMessage: {
     fontSize: 13,
     color: Colors.DARK_2,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
