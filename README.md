@@ -8,7 +8,7 @@ Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingred
 
 ## Demo
 
-[![Demo Video](https://stronger-bucket.s3.amazonaws.com/data/2023/6/12/1686587005700700-00520fdd-a7f3-4383-9972-6ae8ea03274c.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA5IJ6PWQLFYUEIPPJ%2F20230612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230612T162404Z&X-Amz-Expires=604800&X-Amz-Signature=93ff216030d4e9281da3107506af78611a43b7665c51f151fa88ee2b404cf0c7&X-Amz-SignedHeaders=host)]
+[![Demo Video](https://bbdblobstorage.blob.core.windows.net/bbd/src/06_12_2023/d4929d9e-9aab-4a4e-a864-a5d0d6cb4740/Videos/demo_78acc602-4565-4a69-9ef6-01de82ad1c42.mp4)]
 
 ## Install
 
