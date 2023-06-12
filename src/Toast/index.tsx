@@ -1,32 +1,36 @@
-import React from "react";
-import {
-  Animated,
-  Image,
-  ImageRequireSource,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import {Colors, TOAST_COLORS} from "../themes/Colors";
-import useToast, {ToastConfig, hideToast} from "./ToastContainer";
-import {Icons} from "../assets/icons";
+import React, {useEffect, useState} from 'react';
 
-type ToastType = {
-  position?: "top" | "bottom";
-  offset?: number;
-  visibilityTime?: number;
-  successIcon?: ImageRequireSource;
-  errorIcon?: ImageRequireSource;
-  infoIcon?: ImageRequireSource;
-  defaultIcon?: ImageRequireSource;
-  successColor?: string;
-  errorColor?: string;
-  infoColor?: string;
-  defaultColor?: string;
+import {Colors} from '@Theme/Colors';
+import {ImageRequireSource} from 'react-native';
+import {Icons} from '../assets/icons';
+import {TOAST_COLORS} from '../themes/Colors';
+import AnimatedToast from './AnimatedToast';
+import {ShowToastType, ToastProps, ToastType} from './type';
+
+let toasts: ToastProps[] = [];
+const ref = React.createRef<Function>();
+const offSets = React.createRef<number[]>();
+
+export const showToast = (
+  message: string,
+  type: ShowToastType = 'default',
+  iconPath?: ImageRequireSource,
+) => {
+  const key = Date.now();
+  const offSet = offSets.current?.reduce((off, acc) => off + acc + 10);
+
+  toasts.push({
+    key,
+    message,
+    type,
+    offSet,
+    iconPath,
+  });
+  ref.current?.([...toasts, {key, message, type, offSet, iconPath}]);
 };
 
 const Toast = ({
-  position = "bottom",
+  position = 'top',
   offset = 50,
   visibilityTime = 4000,
   successIcon = Icons.ToastCheck,
@@ -38,6 +42,8 @@ const Toast = ({
   infoColor = TOAST_COLORS.info,
   defaultColor = Colors.DARK_2,
 }: ToastType) => {
+  const [tost, setTost] = useState(toasts);
+
   const ToastConfig = {
     success: {color: successColor, icon: successIcon},
     error: {color: errorColor, icon: errorIcon},
@@ -45,95 +51,39 @@ const Toast = ({
     default: {color: defaultColor, icon: defaultIcon},
   };
 
-  const {fadeAnim, posAnim, visible, Icon, toast} = useToast(
-    position,
-    offset,
-    visibilityTime,
-    ToastConfig
-  );
+  ref.current = setTost;
+
+  useEffect(() => {
+    offSets.current = [offset];
+  }, []);
+
+  // remove toast from array
+  const pop = (index: number) => {
+    // if toast is the last one, clear the array
+    index == toasts.length - 1 &&
+      ((toasts = []), setTost([]), (offSets.current = [offset]));
+  };
+
+  const cbOnLayout = (offset: number) => {
+    offSets.current?.push(offset);
+  };
 
   return (
-    <Animated.View
-      onTouchMove={({nativeEvent}) =>
-        nativeEvent.locationY > 100 && hideToast()
-      }
-      style={styles.mainContainer(
-        visible,
-        fadeAnim,
-        posAnim,
-        ToastConfig[toast.type]?.color,
-        position
-      )}
-    >
-      {Icon && (
-        <Image
-          source={Icon}
-          style={styles.iconStyle(
-            ToastConfig[toast.type]?.color,
-            toast.isDefault
-          )}
+    <>
+      {toasts.map((item, index) => (
+        <AnimatedToast
+          key={item?.key}
+          index={index}
+          cbOnDisplayed={pop}
+          toast={item}
+          cbOnLayout={cbOnLayout}
+          colorNIcon={ToastConfig[item?.type]}
+          position={position}
+          visibilityTime={visibilityTime}
         />
-      )}
-      <View style={toast.message?.length > 36 && {flex: 1}}>
-        <Text
-          style={{
-            fontSize: 13,
-            color: Colors.DARK_2,
-            fontWeight: "bold",
-          }}
-          numberOfLines={2}
-        >
-          {toast.message}
-        </Text>
-      </View>
-    </Animated.View>
+      ))}
+    </>
   );
 };
 
 export default Toast;
-
-const styles = StyleSheet.create({
-  iconStyle: (color: string, isDefault: boolean): any => ({
-    height: 30,
-    width: 30,
-    resizeMode: "contain",
-    marginRight: 10,
-    ...(!isDefault && {tintColor: color}),
-  }),
-  mainContainer: (
-    visible: boolean,
-    fadeAnim: any,
-    posAnim: any,
-    color: string,
-    position: string
-  ) => ({
-    position: "absolute",
-    alignSelf: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    ...(position == "bottom" && {bottom: 0}),
-    zIndex: visible ? 9999 : undefined,
-    opacity: fadeAnim,
-    transform: [
-      {
-        translateY: posAnim,
-      },
-    ],
-    borderColor: color,
-    borderWidth: 2,
-    backgroundColor: Colors.WHITE,
-    borderRadius: 40,
-    paddingVertical: 15,
-    shadowColor: Colors.DARK_2,
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5.62,
-    elevation: 8,
-    marginHorizontal: 30,
-    paddingRight: 20,
-    paddingLeft: 10,
-  }),
-});

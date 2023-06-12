@@ -23,11 +23,6 @@
     "react": "*",
     "react-native": "*"
   },
-  "dependencies": {
-    "react-native-size-matters": "^0.4.0",
-    "react": "18.2.0",
-    "react-native": "0.71.7"
-  },
   "devDependencies": {
     "@types/react": "^18.2.7",
     "@tsconfig/react-native": "^3.0.2",

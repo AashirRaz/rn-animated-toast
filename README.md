@@ -8,7 +8,7 @@ Toast it up! Elevate your React Native app with `<Toast />` - the perfect ingred
 
 ## Demo
 
-[![Demo Video](./src/assets/demo/demo.mp4)]
+[![Demo Video](https://stronger-bucket.s3.amazonaws.com/data/2023/6/12/1686587005700700-00520fdd-a7f3-4383-9972-6ae8ea03274c.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA5IJ6PWQLFYUEIPPJ%2F20230612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230612T162404Z&X-Amz-Expires=604800&X-Amz-Signature=93ff216030d4e9281da3107506af78611a43b7665c51f151fa88ee2b404cf0c7&X-Amz-SignedHeaders=host)]
 
 ## Install
 
@@ -83,7 +83,6 @@ There are lots of props to customize your toast or your can use renderToast to i
 const onPress = () => {
     showToast(message: "Task finished successfully",
         type: "default" | "success" | "error" | "info",
-        showDefaultIcon: false,
         iconPath: require("../../images/icon.png")
     );
 }
@@ -91,14 +90,13 @@ const onPress = () => {
 
 ## Props
 
-| Prop            | Type               | Optional | Default | Description                                              |
-| --------------- | ------------------ | -------- | ------- | -------------------------------------------------------- |
-| message         | string             | No       |         | Message which is need to be displayed                    |
-| type            | string             | Yes      | default | type of showing message                                  |
-| showDefaultIcon | boolean            | Yes      | false   | To display the default icon , without showing type icons |
-| iconPath        | ImageRequireSource | Yes      |         | Icon to display in the toast message                     |
+| Prop     | Type               | Optional | Default | Description                           |
+| -------- | ------------------ | -------- | ------- | ------------------------------------- |
+| message  | string             | No       |         | Message which is need to be displayed |
+| type     | string             | Yes      | default | type of showing message               |
+| iconPath | ImageRequireSource | Yes      |         | Icon to display in the toast message  |
 
-### hideToast()
+<!-- ### hideToast()
 
 Call hideToast to hide all that toast that are invoked
 
@@ -106,7 +104,7 @@ Call hideToast to hide all that toast that are invoked
 const onPress = () => {
   hideToast();
 };
-```
+``` -->
 
 ## Contributing
 

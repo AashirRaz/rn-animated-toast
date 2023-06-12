@@ -1,4 +1,4 @@
-import Toast from "./Toast";
-import {hideToast, showToast} from "./Toast/ToastContainer";
+import Toast from './Toast';
+import {showToast} from './Toast';
 
-export {Toast as default, showToast, hideToast};
+export {Toast as default, showToast};
