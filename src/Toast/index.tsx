@@ -93,7 +93,7 @@ const Toast = ({
       style={{
         position: 'absolute',
         zIndex: 999,
-        [position]: offset + position == 'bottom' ? 20 : 0,
+        [position]: position == 'top' ? offset : offset + 30,
         width: '100%',
       }}>
       {toasts.map(item =>
