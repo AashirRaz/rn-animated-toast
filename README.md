@@ -72,6 +72,7 @@ There are lots of props to customize your toast or your can use renderToast to i
     errorColor="red"
     infoColor="yellow"
     defaultColor="black"
+    isAnimated={true}
 >
 ```
 

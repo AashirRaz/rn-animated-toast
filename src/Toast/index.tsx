@@ -1,38 +1,49 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 
-import {Colors} from '@Theme/Colors';
-import {ImageRequireSource} from 'react-native';
+import {Colors} from '../themes/Colors';
+import {
+  ImageRequireSource,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+  View,
+} from 'react-native';
 import {Icons} from '../assets/icons';
 import {TOAST_COLORS} from '../themes/Colors';
-import AnimatedToast from './AnimatedToast';
-import {ShowToastType, ToastProps, ToastType} from './type';
+import {ShowToastType, ToastConfig, ToastProps, ToastType} from './type';
+import AnimatedToast from '../components/AnimatedToast';
+import SimpleToast from '../components/SimpleToast';
 
-let toasts: ToastProps[] = [];
-const ref = React.createRef<Function>();
-const offSets = React.createRef<number[]>();
+const ref = React.createRef() as any;
+let tempToasts = [] as ToastProps[];
 
 export const showToast = (
   message: string,
   type: ShowToastType = 'default',
   iconPath?: ImageRequireSource,
+  isStacked = false,
 ) => {
-  const key = Date.now();
-  const offSet = offSets.current?.reduce((off, acc) => off + acc + 10);
+  if (
+    !isStacked &&
+    tempToasts.find((toast: ToastProps) => toast.message == message)
+  )
+    return;
 
-  toasts.push({
-    key,
+  const toast = {
+    key: Math.random() * Date.now(),
     message,
     type,
-    offSet,
     iconPath,
-  });
-  ref.current?.([...toasts, {key, message, type, offSet, iconPath}]);
+  };
+
+  tempToasts.push(toast);
+  ref.current?.((toasts: ToastProps[]) => [...toasts, toast]);
 };
 
 const Toast = ({
   position = 'top',
-  offset = 50,
-  visibilityTime = 4000,
+  offset = 30,
+  visibilityTime = 5000,
   successIcon = Icons.ToastCheck,
   errorIcon = Icons.ToastError,
   infoIcon = Icons.ToastInfo,
@@ -41,48 +52,72 @@ const Toast = ({
   errorColor = TOAST_COLORS.error,
   infoColor = TOAST_COLORS.info,
   defaultColor = Colors.DARK_2,
+  isAnimated = false,
 }: ToastType) => {
-  const [tost, setTost] = useState(toasts);
+  const [toasts, setToasts] = useState<ToastProps[]>([]);
 
-  const ToastConfig = {
+  const ToastConfig: ToastConfig = {
     success: {color: successColor, icon: successIcon},
     error: {color: errorColor, icon: errorIcon},
     info: {color: infoColor, icon: infoIcon},
     default: {color: defaultColor, icon: defaultIcon},
   };
 
-  ref.current = setTost;
-
   useEffect(() => {
-    offSets.current = [offset];
+    if (
+      Platform.OS == 'android' &&
+      UIManager.setLayoutAnimationEnabledExperimental
+    ) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
   }, []);
 
-  // remove toast from array
-  const pop = (index: number) => {
-    // if toast is the last one, clear the array
-    index == toasts.length - 1 &&
-      ((toasts = []), setTost([]), (offSets.current = [offset]));
-  };
+  useLayoutEffect(() => {
+    ref.current = setToasts;
 
-  const cbOnLayout = (offset: number) => {
-    offSets.current?.push(offset);
+    return () => {
+      ref.current = null;
+      setToasts([]);
+      tempToasts = [];
+    };
+  }, []);
+
+  const pop = (toast: ToastProps) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    tempToasts = tempToasts.filter(item => item.key != toast?.key);
+    setToasts(prev => prev.filter(item => item.key != toast?.key));
   };
 
   return (
-    <>
-      {toasts.map((item, index) => (
-        <AnimatedToast
-          key={item?.key}
-          index={index}
-          cbOnDisplayed={pop}
-          toast={item}
-          cbOnLayout={cbOnLayout}
-          colorNIcon={ToastConfig[item?.type]}
-          position={position}
-          visibilityTime={visibilityTime}
-        />
-      ))}
-    </>
+    <View
+      style={{
+        position: 'absolute',
+        zIndex: 999,
+        [position]: offset + position == 'bottom' ? 20 : 0,
+        width: '100%',
+      }}>
+      {toasts.map(item =>
+        isAnimated ? (
+          <AnimatedToast
+            key={item?.key}
+            cbOnDisplayed={pop}
+            toast={item}
+            colorNIcon={ToastConfig[item?.type]}
+            position={position}
+            visibilityTime={visibilityTime}
+          />
+        ) : (
+          <SimpleToast
+            key={item?.key}
+            cbOnDisplayed={pop}
+            toast={item}
+            colorNIcon={ToastConfig[item?.type]}
+            position={position}
+            visibilityTime={visibilityTime}
+          />
+        ),
+      )}
+    </View>
   );
 };
 

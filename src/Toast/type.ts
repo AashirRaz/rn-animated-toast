@@ -12,24 +12,26 @@ export type ToastType = {
   errorColor?: string;
   infoColor?: string;
   defaultColor?: string;
+  isAnimated?: boolean;
 };
 
 export type ShowToastType = 'success' | 'error' | 'info' | 'default';
+
+export type ToastConfig = {
+  [key in ShowToastType]: {color: string; icon?: ImageRequireSource};
+};
 
 export type ToastProps = {
   key: number;
   message: string;
   type: ShowToastType;
-  offSet: number;
   iconPath?: ImageRequireSource;
 };
 
-export type AnimatedToastProps = {
-  index: number;
-  cbOnDisplayed: (a: number) => void;
+export type GeneralToastProps = {
+  cbOnDisplayed: (i: ToastProps) => void;
   toast: ToastProps;
-  cbOnLayout: (a: number) => void;
-  colorNIcon: {color: string; icon: ImageRequireSource};
+  colorNIcon: {color: string; icon?: ImageRequireSource};
   position: 'top' | 'bottom';
   visibilityTime: number;
 };
