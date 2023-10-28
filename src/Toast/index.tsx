@@ -1,31 +1,32 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
-import {Colors} from '../themes/Colors';
+import { Colors } from "../themes/Colors";
 import {
   ImageRequireSource,
   LayoutAnimation,
   Platform,
   UIManager,
   View,
-} from 'react-native';
-import {Icons} from '../assets/icons';
-import {TOAST_COLORS} from '../themes/Colors';
-import {ShowToastType, ToastConfig, ToastProps, ToastType} from './type';
-import AnimatedToast from '../components/AnimatedToast';
-import SimpleToast from '../components/SimpleToast';
+} from "react-native";
+import { Icons } from "../assets/icons";
+import { TOAST_COLORS } from "../themes/Colors";
+import { ShowToastType, ToastConfig, ToastProps, ToastType } from "./type";
+import AnimatedToast from "../components/AnimatedToast";
+import SimpleToast from "../components/SimpleToast";
 
 const ref = React.createRef() as any;
 let tempToasts = [] as ToastProps[];
 
 export const showToast = (
   message: string,
-  type: ShowToastType = 'default',
+  type: ShowToastType = "default",
   iconPath?: ImageRequireSource,
-  isStacked = false,
+  isStacked = false
 ) => {
   if (
     !isStacked &&
-    tempToasts.find((toast: ToastProps) => toast.message == message)
+    tempToasts.find((toast: ToastProps) => toast.message == message) &&
+    message.trim() == ""
   )
     return;
 
@@ -41,7 +42,7 @@ export const showToast = (
 };
 
 const Toast = ({
-  position = 'top',
+  position = "top",
   offset = 30,
   visibilityTime = 5000,
   successIcon = Icons.ToastCheck,
@@ -57,15 +58,15 @@ const Toast = ({
   const [toasts, setToasts] = useState<ToastProps[]>([]);
 
   const ToastConfig: ToastConfig = {
-    success: {color: successColor, icon: successIcon},
-    error: {color: errorColor, icon: errorIcon},
-    info: {color: infoColor, icon: infoIcon},
-    default: {color: defaultColor, icon: defaultIcon},
+    success: { color: successColor, icon: successIcon },
+    error: { color: errorColor, icon: errorIcon },
+    info: { color: infoColor, icon: infoIcon },
+    default: { color: defaultColor, icon: defaultIcon },
   };
 
   useEffect(() => {
     if (
-      Platform.OS == 'android' &&
+      Platform.OS == "android" &&
       UIManager.setLayoutAnimationEnabledExperimental
     ) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -84,19 +85,20 @@ const Toast = ({
 
   const pop = (toast: ToastProps) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    tempToasts = tempToasts.filter(item => item.key != toast?.key);
-    setToasts(prev => prev.filter(item => item.key != toast?.key));
+    tempToasts = tempToasts.filter((item) => item.key != toast?.key);
+    setToasts((prev) => prev.filter((item) => item.key != toast?.key));
   };
 
   return (
     <View
       style={{
-        position: 'absolute',
+        position: "absolute",
         zIndex: 999,
-        [position]: position == 'top' ? offset : offset + 30,
-        width: '100%',
-      }}>
-      {toasts.map(item =>
+        [position]: position == "top" ? offset : offset + 30,
+        width: "100%",
+      }}
+    >
+      {toasts.map((item) =>
         isAnimated ? (
           <AnimatedToast
             key={item?.key}
@@ -115,7 +117,7 @@ const Toast = ({
             position={position}
             visibilityTime={visibilityTime}
           />
-        ),
+        )
       )}
     </View>
   );

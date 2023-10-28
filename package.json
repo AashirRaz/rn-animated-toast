@@ -1,6 +1,6 @@
 {
   "name": "rn-animated-toast",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A simple and customizable toast library for react native.",
   "main": "src/index.ts",
   "scripts": {
