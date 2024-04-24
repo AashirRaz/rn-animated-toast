@@ -26,7 +26,7 @@ export const showToast = (
   if (
     !isStacked &&
     tempToasts.find((toast: ToastProps) => toast.message == message) &&
-    message.trim() == ""
+    message.trim()
   )
     return;
 
